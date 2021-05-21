@@ -12,10 +12,9 @@ function loadConfig() {
         const configObj = JSON.parse(fs.readFileSync("./config.json", "utf8"));
         const net_id = configObj["net_id"] || configObj["netId"] || configObj["id"] || configObj["username"];
         const password = configObj["password"];
-        const delay = configObj["delay"];
+        const interval = configObj["interval"];
 
-        return Object.keys(configObj).every((el) => ["net_id", "netId", "id", "username", "password"].includes(el)) ?
-            { net_id, password, delay } : null;
+        return { net_id, password, interval };
     } catch (_) {
         try {
             const credentialStr = fs.readFileSync("./credential.txt", "utf8");
@@ -70,7 +69,7 @@ async function checkGrade({ net_id, password }) {
 
 const main = (function () {
     let timeoutID;
-    const { net_id, password, delay } = loadConfig();
+    const { net_id, password, interval } = loadConfig();
 
     return (typeof net_id === "string" && typeof password === "string") ? (async function run() {
         try {
@@ -79,7 +78,7 @@ const main = (function () {
             await checkGrade({ net_id, password });
             timeoutID = setTimeout(async () => {
                 await run();
-            }, 1000 * 60 * ((typeof delay === "number" && delay > 5) ? delay : 60));
+            }, 1000 * 60 * ((typeof interval === "number" && interval >= 5) ? interval : 60));
         } catch (e) {
             console.error(`${redStyle}Failed at ${(new Date()).toLocaleString()}:\n${e}${resetStyle}`);
             process.exit(1);
