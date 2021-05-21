@@ -1,0 +1,18 @@
+{
+  "name": "nyu-grade-checker",
+  "version": "1.0.0",
+  "description": "A Script that Automatically Checks Grade on NYU Albert",
+  "main": "nyu-grade-checker.js",
+  "author": {
+    "name": "McCoy Zhu",
+    "email": "mccoy.zhu@nyu.edu",
+    "url": "https://github.com/zhumingcheng697"
+  },
+  "license": "CC-BY-NC-SA-4.0",
+  "dependencies": {
+    "puppeteer": "^9.1.1"
+  },
+  "scripts": {
+    "start": "node nyu-grade-checker.js"
+  }
+}
