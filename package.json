@@ -8,6 +8,10 @@
     "email": "mccoy.zhu@nyu.edu",
     "url": "https://github.com/zhumingcheng697"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhumingcheng697/NYU-Grade-Checker.git"
+  },
   "license": "CC-BY-NC-SA-4.0",
   "dependencies": {
     "puppeteer": "^9.1.1"
