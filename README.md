@@ -1,10 +1,10 @@
 # NYU-Grade-Checker
 
-**A Script that Automatically Checks Grade on NYU Albert.**
+**A Script that Automatically Checks Grade on [NYU Albert](https://m.albert.nyu.edu/app/dashboard/grades).**
 
 ## Features
 
-- Check for latest grades regularly after set interval
+- Check for latest grades regularly after [set interval](#how-to-configure-configjson)
 
 - Check for latest grades with [simple CLI commands](#cli-commands)
 
@@ -23,9 +23,10 @@
     ```
 
 3. Configure either [`config.json`](#how-to-configure-configjson) or [`credential.txt`](#how-to-configure-credentialtxt).
+   
    > The only way to customize the interval at which the program checks for new grades is through [`config.json`](#how-to-configure-configjson).
 
-   > If you have set up `config.json` correctly, `credential.txt` will be ignored even if it has been set up differently.
+   > If you have set up `config.json` correctly, `credential.txt` will be ignored even if it has been set up.
 
 4. Run the script `nyu-grade-checker.js`.
 
@@ -42,38 +43,38 @@
 
 ## How to Configure `config.json`
 
-- You need to set your NetID and your password in `config.json`:
+You need to set your NetID and your password in `config.json`:
 
-    ```json
-    {
-      "net_id": <your_net_id>,
-      "password": <your_password>
-    }
-    ```
+```json
+{
+  "net_id": <your_net_id>,
+  "password": <your_password>
+}
+```
 
-- You can also optionally set the interval in minute at which the program checks for new grade in `config.json`:
+You can also optionally set the interval in minute at which the program checks for new grade in `config.json`:
 
-    ```json
-    {
-      "net_id": <your_net_id>,
-      "password": <your_password>,
-      "interval": <positive_interval_in_minute>
-    }
-    ```
+```json
+{
+  "net_id": <your_net_id>,
+  "password": <your_password>,
+  "interval": <positive_interval_in_minute>
+}
+```
 
-  > The interval has to be a positive number equal to or greater than 5, or it will be set to 60 by default.
+> The interval has to be a positive number equal to or greater than 5, or it will be set to 60 by default.
 
 ## How to Configure `credential.txt`
 
-- You need to set your NetID and your password in `credential.txt`:
+You need to set your NetID and your password in `credential.txt`:
 
-    ```txt
-    <your_net_id>
-    
-    <your_password>
-    ```
+```txt
+<your_net_id>
 
-- If you want to customize the interval at which the program checks for new grades, you have to [configure `config.json`](#how-to-configure-configjson) instead.
+<your_password>
+```
+
+> If you want to customize the interval at which the program checks for new grades, you have to [configure `config.json`](#how-to-configure-configjson) instead.
 
 ## CLI Commands
 
