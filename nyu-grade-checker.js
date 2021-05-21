@@ -7,6 +7,11 @@ const greenStyle = "\x1b[32m";
 const whiteStyle = "\x1b[37m";
 const resetStyle = "\x1b[0m";
 
+/**
+ * Loads the configuration file.
+ *
+ * @return {Object|null}
+ */
 function loadConfig() {
     try {
         const configObj = JSON.parse(fs.readFileSync("./config.json", "utf8"));
@@ -26,7 +31,14 @@ function loadConfig() {
     }
 }
 
-async function checkGrade({ net_id, password }) {
+/**
+ * Checks user's latest grade.
+ *
+ * @param net_id {string} User's NetID
+ * @param password {string} User's login password
+ * @return {Promise<{term: string, grades: {Code: string, Class: string, Grade: string}[]}>}
+ */
+async function checkGrade(net_id, password) {
     const browser = await puppeteer.launch({
         headless: true,
         args: ["--no-sandbox", "--disable-setuid-sandbox"]
@@ -65,8 +77,15 @@ async function checkGrade({ net_id, password }) {
     }
 
     await browser.close();
+
+    return { term, grades };
 }
 
+/**
+ * Main function that runs the program.
+ *
+ * @type {function}
+ */
 const main = (function () {
     let timeoutID;
     const { net_id, password, interval } = loadConfig();
@@ -75,7 +94,7 @@ const main = (function () {
         try {
             clearTimeout(timeoutID);
             console.log(`${whiteStyle}${(new Date()).toLocaleString()} - Checking grades...${resetStyle}`);
-            await checkGrade({ net_id, password });
+            await checkGrade(net_id, password);
             timeoutID = setTimeout(async () => {
                 await run();
             }, 1000 * 60 * ((typeof interval === "number" && interval >= 5) ? interval : 60));
