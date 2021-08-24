@@ -10,7 +10,7 @@ const resetStyle = "\x1b[0m";
 /**
  * Loads the configuration file.
  *
- * @return {Object|null}
+ * @return {Object}
  */
 function loadConfig() {
     try {
@@ -26,7 +26,7 @@ function loadConfig() {
             const [, net_id, password] = credentialStr.match(/^[\n\r]*([a-z]+[0-9]+)[\n\r]+(.+)[\n\r]*$/i);
             return { net_id, password };
         } catch (_) {
-            return null;
+            return {};
         }
     }
 }
