@@ -70,10 +70,10 @@ async function checkGrade(net_id, password) {
     ]);
 
     if (term && grades.length) {
-        console.log(`${greenStyle}Grades for ${term}:${resetStyle}`);
+        console.log(`${ greenStyle }Grades for ${ term }:${ resetStyle }`);
         console.table(grades);
     } else {
-        console.error(`${redStyle}Unable to get grades${resetStyle}`);
+        console.error(`${ redStyle }Unable to get grades${ resetStyle }`);
     }
 
     await browser.close();
@@ -91,19 +91,18 @@ const main = (function () {
     const { net_id, password, interval } = loadConfig();
 
     return (typeof net_id === "string" && typeof password === "string") ? (async function run() {
+        clearTimeout(timeoutID);
+        console.log(`${ whiteStyle }${ (new Date()).toLocaleString() } - Checking grades...${ resetStyle }`);
         try {
-            clearTimeout(timeoutID);
-            console.log(`${whiteStyle}${(new Date()).toLocaleString()} - Checking grades...${resetStyle}`);
             await checkGrade(net_id, password);
-            timeoutID = setTimeout(async () => {
-                await run();
-            }, 1000 * 60 * ((typeof interval === "number" && interval >= 5) ? interval : 60));
         } catch (e) {
-            console.error(`${redStyle}Failed at ${(new Date()).toLocaleString()}:\n${e}${resetStyle}`);
-            process.exit(1);
+            console.error(`${ redStyle }Failed at ${ (new Date()).toLocaleString() }:\n${ e }${ resetStyle }`);
         }
+        timeoutID = setTimeout(async () => {
+            await run();
+        }, 1000 * 60 * ((typeof interval === "number" && interval >= 5) ? interval : 60));
     }) : () => {
-        console.error(`${redStyle}Please set your login credentials correctly in "config.json" or "credential.txt"${resetStyle}`);
+        console.error(`${ redStyle }Please set your login credentials correctly in "config.json" or "credential.txt"${ resetStyle }`);
         process.exit(1);
     };
 })();
@@ -117,7 +116,7 @@ const main = (function () {
         if (["grade", "check", "get"].includes(line.toLowerCase())) {
             main();
         } else {
-            console.log(`${whiteStyle}Type "grade", "check", or "get" to check for grade now${resetStyle}`);
+            console.log(`${ whiteStyle }Type "grade", "check", or "get" to check for grade now${ resetStyle }`);
         }
     });
 
