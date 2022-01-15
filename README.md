@@ -2,6 +2,8 @@
 
 **A Script that Automatically Checks Grade on [NYU Albert](https://m.albert.nyu.edu/app/dashboard/grades).**
 
+> In January 2022, NYU retired [Albert Mobile](https://m.albert.nyu.edu/), so this script is no longer functional.
+
 ## Features
 
 - Check for latest grades regularly after [set interval](#how-to-configure-configjson)
